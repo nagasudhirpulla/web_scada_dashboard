@@ -1,0 +1,35 @@
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.dashboard {
+    background: white;
+    margin: 0 0 0 0;
+}
+
+.dashboard:after {
+    /* Or @extend clearfix */
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.dashboard-cell {
+    float: left;
+    padding-right: 0;
+}
+
+.dashboard [class*='col-']:last-of-type {
+    padding-right: 0;
+}
+
+/* Opt-in outside padding */
+.dashboard-pad {
+    padding: 0 0 0 0px;
+}
+
+.dashboard-pad [class*='col-']:last-of-type {
+    padding-right: 0px;
+}

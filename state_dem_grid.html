@@ -1,0 +1,65 @@
+<html>
+<title>State Demands</title>
+<link rel="stylesheet" href="reset_css.css">
+<link rel="stylesheet" href="state_dem_grid.css">
+<body>
+<div class="grid">
+    <div class="col-1-2">
+        <div class="module" id="dem">
+
+        </div>
+    </div>
+    <div class="col-1-2">
+        <div class="module" id="freq">
+
+        </div>
+    </div>
+</div>
+<div class="grid">
+    <div class="col-1-2">
+        <div class="module" id="mp">
+
+        </div>
+    </div>
+    <div class="col-1-2">
+        <div class="module" id="mseb">
+
+        </div>
+    </div>
+</div>
+<div class="grid">
+    <div class="col-1-2">
+        <div class="module" id="geb">
+
+        </div>
+    </div>
+    <div class="col-1-2">
+        <div class="module" id="cseb">
+
+        </div>
+    </div>
+</div>
+<input type='text' value='' id='dateInput'/>
+<input type='text' value='' id='dateInputYest'/>
+<button onclick="loadData()">Fetch Data</button>
+<button onclick="toggleToolbar()">Toggle Toolbar</button><br>
+<ul style="link-style-type:none;">
+<li style="display: inline-block;"><a href="file://///172.20.32.101/Users/Administrator/Downloads/POSOCO-master/index.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">Grid Assistant</a></li>
+<li style="display: inline-block;"><a href="file://///172.20.32.101/Users/Administrator/Downloads/LeafletCanvas/index.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">Voltage Contour</a></li>
+<li style="display: inline-block;"><a href="file://///172.20.32.101/Users/Administrator/Downloads/LeafletCanvas_new/index-circles.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">Voltage Visualization</a></li>
+<li style="display: inline-block;"><a href="file://///172.20.32.101/Users/Administrator/Downloads/eDNAWebAPIClient-gh-pages/dem_freq.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">Demand Frequency</a></li>
+<li style="display: inline-block;"><a href="file://///172.20.32.101/Users/Administrator/Downloads/power_tracer-gh-pages/apps/singletest.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">Power Flow Visualization</a></li>
+</ul>
+<input type="text" id="serverBaseAddressInput" value="http://wmrm0mc1:62448" style="width: 150px">
+<div id="console"
+     style="height: 100px; margin-right: 10%;margin-left: 2%; overflow: auto;border: 1px solid #33333300"></div>
+<button onclick="clearConsole()" id="clearConsoleButton"
+        style="margin-left: 2%; background-color:#aaaaaa; border: none">ClearConsole
+</button>
+<script src="../libs/js/jquery.min.js"></script>
+<script src="../libs/js/plotly-latest.min.js"></script>
+<script src="../libs/js/async.min.js"></script>
+<script src="../consoleFunctions.js"></script>
+<script src="state_dem.js"></script>
+</body>
+</html>
