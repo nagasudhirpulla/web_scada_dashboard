@@ -1,15 +1,21 @@
 window.onload = function () {
     apiServerBaseAddress_g = document.getElementById("serverBaseAddressInput").value;
-    var todayDate = new Date();
-    var yestDate = new Date(todayDate.getTime() - 86400000);
     initializeDashboard();
-    //workerTimerId_g = setInterval(fetchForecastValues, 60000);
+    refreshDashboardData();
+    workerTimerId_g = setInterval(refreshDashboardData, 60000);
+
 };
+
+function refreshDashboardData() {
+    dashboard.refresh_cells_async(function (err) {
+
+    });
+}
 
 function loadData() {
     clearInterval(workerTimerId_g);
-    fetchForecastValues();
-    workerTimerId_g = setInterval(fetchForecastValues, 60000);
+    refreshDashboardData();
+    workerTimerId_g = setInterval(refreshDashboardData, 60000);
 }
 
 var apiServerBaseAddress_g = 'http://wmrm0mc1:62448';
@@ -20,27 +26,22 @@ var dashboard;
 function initializeDashboard() {
     dashboardContainer = document.getElementById('dashboard_container');
     dashboardContainer.innerHTML = "";
-    dashboard = new Dashboard();
-    dashboardContainer.appendChild(dashboard.get_dashboard_div());
-    var cell = new DashboardCell({width: '50%', height: '50%', dtick: 1});
-    var traceObj = new LineTraceScada({server_base_address: apiServerBaseAddress_g, trace_color: 'rgb(255, 255, 0)'});
-    var traceObj2 = new LineTraceScada({server_base_address: apiServerBaseAddress_g});
-    cell.trace_objs.push(traceObj);
-    cell.trace_objs.push(traceObj2);
-    dashboard.cells.push(cell);
-    var cell = new DashboardCell({width: '50%', height: '50%', dtick: 1, column: 1});
-    var traceObj = new LineTraceScada(
-        {
-            server_base_address: apiServerBaseAddress_g,
-            trace_color: 'rgb(255, 255, 0)',
-            end_hrs: 0
+
+    // create cells from dashboardConfig
+    var cellObjs = [];
+    for (var cellIter = 0; cellIter < dashboardConfig.cell_props.length; cellIter++) {
+        // get the trace objects of this cell
+        var traceObjects = [];
+        for (var traceIter = 0; traceIter < dashboardConfig.cell_props[cellIter].trace_props.length; traceIter++) {
+            traceObjects.push(new LineTraceScada(dashboardConfig.cell_props[cellIter].trace_props[traceIter]));
         }
-    );
-    cell.trace_objs.push(traceObj);
-    dashboard.cells.push(cell);
+        dashboardConfig.cell_props[cellIter].trace_objs = traceObjects;
+        cellObjs.push(new DashboardCell(dashboardConfig.cell_props[cellIter]));
+    }
+    dashboard = new Dashboard({cells: cellObjs});
+    dashboardContainer.appendChild(dashboard.get_dashboard_div());
     dashboard.lay_cells();
     dashboard.refresh_cells_async(function (err, res) {
-        dashboardContainer.innerHTML = dashboard.get_dashboard_div().outerHTML;
+
     });
-    dashboard.lay_cells();
 }

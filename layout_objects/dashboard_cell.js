@@ -28,6 +28,7 @@ function DashboardCell(opt_options) {
     _this.cell_div = document.createElement('div');
     _this.cell_div.className += ' dashboard-cell';
     _this.plot_div = document.createElement('div');
+    _this.plot_div.id = createUUID();
     _this.plot_div.className += ' plot-div';
     _this.cell_div.appendChild(_this.plot_div);
 
@@ -245,5 +246,14 @@ function DashboardCell(opt_options) {
             //_this.relayout_cell_div();
             return callback(null);
         });
+    }
+
+    function createUUID() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     }
 }
