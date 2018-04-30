@@ -11,6 +11,8 @@ function LineTraceScada(opt_options) {
     //initial values
     _this.fetch_objects = [];
     _this.trace_title = 'Plot title';
+    _this.trace_color = 'rgb(255, 0, 0)';
+    _this.trace_width = 3;
     _this.pnt_id = 'xyz';
     _this.server_base_address = 'http://wmrm0mc1:62448';
     _this.history_fetch_strategy = 'snap';
@@ -43,6 +45,12 @@ function LineTraceScada(opt_options) {
     function setOptions(options) {
         if (options.trace_title !== undefined) {
             set_trace_title(options.trace_title);
+        }
+        if (options.trace_color !== undefined) {
+            _this.trace_color = options.trace_color;
+        }
+        if (options.trace_width !== undefined) {
+            _this.trace_width = options.trace_width;
         }
         if (options.pnt_id !== undefined) {
             set_pnt_id(options.pnt_id)
@@ -134,6 +142,7 @@ function LineTraceScada(opt_options) {
     _this.get_timestamps = get_timestamps;
     _this.get_values = get_values;
     _this.get_status_values = get_status_values;
+    _this.get_trace_obj = get_trace_obj;
 
     /**Setters**/
     function set_trace_title(cellsInput) {
@@ -183,7 +192,7 @@ function LineTraceScada(opt_options) {
                 //WriteLineConsole(urlStr);
                 //WriteLineConsole(JSON.stringify(data));
                 _this.fetch_objects = data;
-                callback(null, data);
+                callback(null, true);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 WriteLineConsole(JSON.stringify(jqXHR));
@@ -196,7 +205,7 @@ function LineTraceScada(opt_options) {
     function get_timestamps() {
         var xLabels = [];
 
-        for(var i=0;i<_this.fetch_objects.length;i++){
+        for (var i = 0; i < _this.fetch_objects.length; i++) {
             xLabels.push(_this.fetch_objects[i]['timestamp']);
         }
 
@@ -206,7 +215,7 @@ function LineTraceScada(opt_options) {
     function get_values() {
         var values = [];
 
-        for(var i=0;i<_this.fetch_objects.length;i++){
+        for (var i = 0; i < _this.fetch_objects.length; i++) {
             values.push(_this.fetch_objects[i]['dval']);
         }
 
@@ -216,11 +225,27 @@ function LineTraceScada(opt_options) {
     function get_status_values() {
         var statusLabels = [];
 
-        for(var i=0;i<_this.fetch_objects.length;i++){
+        for (var i = 0; i < _this.fetch_objects.length; i++) {
             statusLabels.push(_this.fetch_objects[i]['status']);
         }
 
         return statusLabels;
+    }
+
+    function get_trace_obj() {
+        var trace_obj = {
+            y: [],
+            line: {
+                color: 'rgb(255,255,0)',
+                width: 3
+            },
+            name: 'TraceName'
+        };
+        trace_obj.name = _this.trace_title;
+        trace_obj.line.color = _this.trace_color;
+        trace_obj.line.width = _this.trace_width;
+        trace_obj.y = _this.get_values();
+        return trace_obj;
     }
 
     function get_fetch_url() {

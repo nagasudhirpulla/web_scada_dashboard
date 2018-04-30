@@ -21,6 +21,18 @@
     padding-right: 0;
 }
 
+.dashboard-row {
+    background: white;
+    margin: 0 0 0 0;
+}
+
+.dashboard-row:after {
+    /* Or @extend clearfix */
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .dashboard [class*='col-']:last-of-type {
     padding-right: 0;
 }
