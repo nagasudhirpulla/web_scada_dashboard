@@ -4,10 +4,19 @@
 <link rel="stylesheet" href="layout_objects/dashboard.css">
 <link rel="stylesheet" href="index.css">
 <body>
-<input type="text" id="serverBaseAddressInput" value="http://localhost:62448" style="width: 150px">
+<input type="text" id="serverBaseAddressInput" value="http://wmrm0mc1:62448" style="width: 150px">
 
 <div id="dashboard_container"></div>
-
+<button onclick="loadData()">Fetch Data</button>
+<button onclick="toggleToolbar()">Toggle Toolbar</button><br>
+<ul style="link-style-type:none;">
+<li style="display: inline-block;"><a href="file://///wmrm0mc1/Users/Administrator/Downloads/POSOCO-master/index.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">Grid Assistant</a></li>
+<li style="display: inline-block;"><a href="file://///172.20.32.101/Users/Administrator/Downloads/LeafletCanvas/index.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">Voltage Contour</a></li>
+<li style="display: inline-block;"><a href="file://///172.20.32.101/Users/Administrator/Downloads/LeafletCanvas_new/index-circles.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">Voltage Visualization</a></li>
+<li style="display: inline-block;"><a href="file://///172.20.32.101/Users/Administrator/Downloads/eDNAWebAPIClient-gh-pages/State%20Demands/state_dem_grid.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">State Demands</a></li>
+<li style="display: inline-block;"><a href="file://///172.20.32.101/Users/Administrator/Downloads/eDNAWebAPIClient-gh-pages/dem_freq.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">Demand Frequency</a></li>
+<li style="display: inline-block;"><a href="file://///172.20.32.101/Users/Administrator/Downloads/power_tracer-gh-pages/apps/singletest.html" target="_blank" style="margin-right: 20px;color:white;font-size:1.2em">Power Flow Visualization</a></li>
+</ul>
 <div id="console"
      style="height: 100px; margin-right: 10%;margin-left: 2%; overflow: auto;border: 1px solid #33333300"></div>
 <button onclick="clearConsole()" id="clearConsoleButton"
