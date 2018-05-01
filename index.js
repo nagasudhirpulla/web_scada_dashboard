@@ -45,3 +45,16 @@ function initializeDashboard() {
 
     });
 }
+
+function toggleToolbar(){
+	var hoverContainers = document.getElementsByClassName("modebar modebar--hover");
+	for(var i = 0; i < hoverContainers.length; i++){
+		var hoverContainer = hoverContainers[i];
+		var currDisplay = hoverContainer.style.display;
+		if(currDisplay != "none"){
+			hoverContainer.style.display = "none";
+		}else{
+			hoverContainer.style.display = "";
+		}
+	}
+}
